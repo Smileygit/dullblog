@@ -1,3 +1,4 @@
+
 const express = require("express");
 const server = express();
 const PORT = process.env.PORT || 8080;
@@ -9,16 +10,17 @@ const blogposts = require("./modules/blogposts.js");
 server.use(express.static("public"));
 server.use(express.json());
 
-//general error handling---------------
-server.use(function(err, req, res, next){
+server.use(blogposts);
+
+//general error handling ---------------------------
+server.use(function (err, req, res, next) {
 	res.status(500).json({
-		error: "Something goes wrong with server!",
+		error:'Something went wrong on the server!',
 		descr: err
 	}).end();
 });
 
-
-// start server ------------------------
+// start server ------------------------------------
 server.listen(server.get("port"), function () {
 	console.log("server running", server.get("port"));
 });
